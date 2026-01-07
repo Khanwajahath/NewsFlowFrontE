@@ -1,0 +1,20 @@
+.cat-btn{
+    background-color: #233648;
+}
+.search {
+  background: #233648;
+  color: white; /* input text color */
+  border: none;
+}
+
+.search::placeholder {
+  color: #b5c7d3;  /* placeholder color */
+  opacity: 1;      /* IMPORTANT for Firefox */
+}
+.search:focus,
+.search:active {
+  background: #233648;   /* same bg */
+  outline: none;         /* remove blue outline */
+  box-shadow: none;      /* remove Bootstrap glow */
+  color: white;
+}
