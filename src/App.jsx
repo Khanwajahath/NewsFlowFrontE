@@ -8,7 +8,7 @@ import { NewsCat } from './components/categories/categories'
 import { Breaking } from './components/breakingNews/breaking'
 import {LatestStories} from './components/news/latestStories'
 import { Footer } from './components/footer/footer'
-import { Demofetch } from './components/demofetch'
+// import { Demofetch } from './components/demofetch'
 
 function App() {
  

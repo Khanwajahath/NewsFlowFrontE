@@ -4,7 +4,7 @@ export function NewsCat() {
   const [categories, setCategories] = useState([]);
    
   useEffect(() => {
-    fetch(`http://localhost:4000/news/categories`)
+    fetch(`https://news-flow-backend.vercel.app/news/categories`)
       .then(res => res.json())
       .then(data => {
         const temp=data.sources

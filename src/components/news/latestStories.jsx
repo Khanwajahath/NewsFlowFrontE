@@ -17,7 +17,7 @@ export function LatestStories() {
   useEffect(() => {
     const requests = categories.map((category) =>
       fetch(
-        `http://localhost:4000/news/latest?category=${category}`
+        `https://news-flow-backend.vercel.app/news/latest?category=${category}`
       )
         .then((res) => res.json())
         .then((data) => ({

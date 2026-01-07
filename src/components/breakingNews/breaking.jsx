@@ -5,7 +5,7 @@ export function Breaking(){
     const [query]=useState("Breaking");
     const [breaking,setBreaking]=useState([]);
     useEffect(()=>{
-        fetch(`http://localhost:4000/news?q=${query}`)
+        fetch(`https://news-flow-backend.vercel.app/news?q=${query}`)
         .then((response)=>response.json())
         .then((data)=>{
    
