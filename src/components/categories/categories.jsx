@@ -19,9 +19,9 @@ export function NewsCat() {
 
   return (
       <div className="d-flex  gap-3 justify-content-between align-items-center my-0 text-white">
-      <div className="d-flex gap-2 p-2 my-0 catbtns  top-0">
+      <div className=" categoriesd-flex flex-wrap gap-2 p-2 my-0 catbtns  top-0">
         {categories.map((cat,index) => (
-         <button className=" btn  fs-6 fw-semibold mx-1 rounded-5 text-white catbtn" key={index}>{cat}</button> 
+         <button className=" btn  fs-6 fw-semibold mx-1 my-1 rounded-5 text-white catbtn" key={index}>{cat}</button> 
         ))}
       </div>
       </div>

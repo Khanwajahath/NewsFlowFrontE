@@ -7,3 +7,23 @@
 .desc{
     color: #68778b;
 }
+
+.breaking-card{
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between; 
+    gap:5px;
+    margin-top: 10px;
+    width :100%;
+}
+
+@media(min-width:768px){
+    img{
+        width: 50%;
+    }
+    .breaking-card{
+        display: flex;
+        flex-direction: row;
+    } 
+}

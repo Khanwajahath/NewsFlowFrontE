@@ -4,3 +4,8 @@
 .catbtns .catbtn:first-child{
   background-color: #0d6efd
 }
+@media(min-width:768px){
+  .categories{
+    flex-wrap: nowrap;
+  }
+}
