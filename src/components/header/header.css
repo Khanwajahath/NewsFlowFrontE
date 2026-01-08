@@ -18,3 +18,29 @@
   box-shadow: none;      /* remove Bootstrap glow */
   color: white;
 }
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: space-between; 
+  align-items: center;
+  margin-top: 5px;
+  padding: 10px 5px;
+}
+
+.head .input-group {
+  width: 100%;
+}
+
+@media(min-width: 768px) {
+  .head {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .head .input-group {
+    width: 25%;
+  }
+}

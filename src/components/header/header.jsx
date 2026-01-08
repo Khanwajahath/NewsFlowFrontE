@@ -3,7 +3,7 @@ export function NewsHeader() {
     const routes=["Everything","Top Headlines","Sources"]
   return (
     
-      <div className="d-flex gap-3 justify-content-between align-items-center mt-2 px-3 ">
+      <div className="head">
 
         <div className="d-flex gap-2  align-items-end my-0">
             <span className='fw-bold bi bi-newspaper text-primary fs-3'></span>
