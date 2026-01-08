@@ -16,8 +16,4 @@
         gap: 2rem; /* Add spacing between items */
     }
 }
-@media(min-width:768px){
-    .logo{
-        justify-content: center;
-    }
-}
+ 
