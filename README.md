@@ -1,6 +1,6 @@
 # NewsFlow
 
-NewsFlow is a modern news aggregator application. The frontend is a React single-page application that fetches recent news across the world from an external news API. A lightweight Express backend sits between the frontend and the external API to centralize requests, enforce CORS, and cache results in Redis — dramatically reducing duplicate external API calls, improving latency, and helping avoid rate limits.
+NewsFlow is a modern news aggregator application. The frontend is a React single-page application that fetches recent news across the world from an external news API. A lightweight Express backend sits between the frontend and the external API to centralize requests, enforce CORS, and cache results in Redis — dramatically reducing duplicate external API calls, improving latency.
 
 This README documents the project architecture, tech stack, setup, usage, and the caching strategy implemented to reduce multiple API calls.
 
@@ -16,17 +16,13 @@ This README documents the project architecture, tech stack, setup, usage, and th
 - API endpoints (example)
 - Environment variables
 - Local setup (frontend & backend)
-- Deployment notes
-- Troubleshooting
-- Contributing
-- License
 
 ---
 
 ## Project overview
 
-- Frontend: React app that displays top headlines, categories, search, pagination, and article details.
-- Backend: Node.js + Express proxy layer that fetches news from an external API and caches responses in Redis.
+- Frontend: React app that displays top headlines, search, and article details.
+- Backend: Upstash + Node.js + Express proxy layer that fetches news from an external API and caches responses in Redis.
 - Goal: Provide a fast, reliable user experience while minimizing repeated calls to the external news API (save on rate limits, latency, and cost).
 
 ---
@@ -62,7 +58,7 @@ This README documents the project architecture, tech stack, setup, usage, and th
 
 ## Architecture and data flow
 
-1. User interacts with the React frontend (search input, change country/category, pagination).
+1. User interacts with the React frontend (search input).
 2. Frontend sends a request to the Express backend (e.g., `/api/news?...`).
 3. Express:
    - Normalizes the request parameters into a deterministic cache key.
@@ -91,92 +87,14 @@ Principles used:
   - If multiple backend requests arrive simultaneously for the same key and cache is empty, use a short in-process lock or promise dedupe so only one outbound request is made and its result is shared.
 - Cache invalidation:
   - TTL handles most cases.
-  - For admin or special flows, provide endpoints to explicitly purge keys or namespaces (e.g., on-demand refresh).
 - Client-side optimizations:
   - Debounce search input to avoid firing a request per keystroke.
-  - Short-term client-side cache (e.g., in-memory or localStorage) to reuse data between views without re-fetching immediately.
-  - Avoid duplicate simultaneous frontend requests by centralizing fetch calls (React Context or a small request manager).
+  - Avoid duplicate simultaneous frontend requests by centralizing fetch calls (React Context).
 
 Why this reduces calls:
 - Many users request the same or similar news (e.g., top headlines for a country). By caching a single response and serving it to many users, the number of external API calls drops dramatically.
 - Debouncing and request deduplication avoid repeated requests for the same query from the same client or multiple components.
 
-Measured benefits (typical outcomes):
-- Reduced external API calls by 70–95% depending on traffic pattern and chosen TTL.
-- Lowered average request latency (Redis memory reads << external HTTP).
-- Avoided hitting external API rate limits under bursts.
-
----
-
-## Example Express + Redis snippet
-
-Below is an illustrative example of how the backend uses Redis to cache external API responses:
-
-```js
-// server.js (conceptual snippet)
-const express = require('express');
-const fetch = require('node-fetch');
-const Redis = require('ioredis');
-const cors = require('cors');
-
-const app = express();
-app.use(cors());
-const redis = new Redis(process.env.REDIS_URL);
-
-const CACHE_TTL = parseInt(process.env.CACHE_TTL_SECONDS || '600'); // default 10 min
-
-function makeCacheKey(params) {
-  // params include endpoint, country, q, category, page, pageSize
-  const keyParts = ['news', params.endpoint];
-  Object.keys(params).sort().forEach(k => {
-    if (params[k]) keyParts.push(`${k}=${params[k]}`);
-  });
-  return keyParts.join(':');
-}
-
-app.get('/api/news', async (req, res) => {
-  const params = {
-    endpoint: 'top-headlines',
-    country: req.query.country || 'us',
-    category: req.query.category || '',
-    q: req.query.q || '',
-    page: req.query.page || '1',
-    pageSize: req.query.pageSize || '20'
-  };
-
-  const cacheKey = makeCacheKey(params);
-  try {
-    const cached = await redis.get(cacheKey);
-    if (cached) {
-      return res.json(JSON.parse(cached));
-    }
-
-    // External API call
-    const apiUrl = `https://newsapi.example/v2/top-headlines?country=${params.country}&apiKey=${process.env.NEWS_API_KEY}&page=${params.page}&pageSize=${params.pageSize}${params.q ? `&q=${encodeURIComponent(params.q)}` : ''}`;
-    const apiResp = await fetch(apiUrl);
-    if (!apiResp.ok) {
-      return res.status(apiResp.status).json({ error: 'External API error' });
-    }
-    const data = await apiResp.json();
-
-    // Cache response
-    await redis.set(cacheKey, JSON.stringify(data), 'EX', CACHE_TTL);
-
-    res.json(data);
-  } catch (err) {
-    console.error('Error fetching news', err);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
-
-app.listen(process.env.PORT || 4000, () => console.log('Server started'));
-```
-
-Notes:
-- Use a robust Redis client and add retry/backoff for production.
-- Consider add-on strategies like locking (SETNX) or in-memory promise de-duplication to avoid multiple outbound calls for the same key simultaneously.
-
----
 
 ## API endpoints (example)
 
@@ -227,46 +145,4 @@ Prerequisites:
    - npm start (starts React dev server)
 
 4. Open browser at http://localhost:3000 (or the React dev server port).
-
 ---
-
-## Deployment notes
-
-- Host the backend where it has low-latency access to Redis (same region ideally).
-- Use a managed Redis (e.g., AWS Elasticache, Azure Cache, Redis Labs) for production.
-- Secure environment variables (NEWS_API_KEY must not be exposed to the frontend).
-- Use HTTPS and set CORS to only allow the frontend origin.
-- Adjust CACHE_TTL based on traffic patterns and how fresh you want news to be.
-- Use a process manager (PM2) or container orchestration for backend reliability.
-
----
-
-## Troubleshooting
-
-- If articles don't appear:
-  - Check backend logs for external API errors or Redis connectivity issues.
-  - Verify NEWS_API_KEY is set and valid.
-- If stale data persists:
-  - Confirm CACHE_TTL is set correctly.
-  - If using manual purge endpoints, ensure correct key format is used.
-- High latency:
-  - Check Redis connectivity and location.
-  - Consider increasing cache hit ratio by using slightly longer TTLs for low-priority endpoints.
-
----
-
-## Contributing
-
-- Fork the repo and open pull requests for features or fixes.
-- Keep UI changes in the frontend repo and backend changes in the backend repo.
-- For caching/behavior changes, include rationale and performance implications.
-
----
-
-## License
-
-Specify your preferred license (MIT, Apache-2.0, etc.) here.
-
----
-
-I have prepared this README to comprehensively explain the project, the tech stack, and how caching in Redis and an Express proxy reduces multiple API calls; add this README.md file to the NewsFlowFrontE repository.
