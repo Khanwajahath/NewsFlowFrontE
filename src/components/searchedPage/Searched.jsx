@@ -7,15 +7,8 @@ export function Searched({ data }) {
     <div>
       <h1 className="text-white">Breaking News</h1>
 
-      <div className="card d-flex mt-3 w-75 justify-content-center" style={{marginLeft:"13%",borderRadius:"5px"}}>
-        {/* <img src={data[0].urlToImage} className="card-img rounded"
-                style={{width:"100%",height:"100%",objectFit:"cover"}}></img>
-                <div className="p-3 card-img-overlay d-flex flex-column justify-content-end text-white">
-                    <div className="">
-                    <h2 className=" ">{data[0].title}</h2>
-                    <p>{data[0].description}</p>
-                    </div>
-                </div> */}
+      <div className="card d-flex mt-3 w-100 justify-content-center" style={{marginLeft:"1px",width:"90vw" }}>
+        <div className="p-5">
         <div
           id="carouselExampleCaptions"
           className="carousel slide"
@@ -66,7 +59,7 @@ export function Searched({ data }) {
                 className="d-block w-100"
                 alt="First slide"
               />
-              <div className="carousel-caption d-none d-md-block">
+              <div className="carousel-caption d-none d-md-block fw-bolder">
                 <h5>{data[0].title}</h5>
                 <p>{data[0].description}</p>
               </div>
@@ -138,9 +131,10 @@ export function Searched({ data }) {
             <span className="visually-hidden">Next</span>
           </button>
         </div>
+        </div>
       </div>
       <div
-        className="d-flex flex-wrap p-4 gap-3 justify-content-center "
+        className="d-flex flex-wrap p-4 gap-0 "
         id="main"
       >
         {data.shift() &&

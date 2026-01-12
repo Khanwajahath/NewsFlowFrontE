@@ -11,7 +11,10 @@ export function Card({item,pos}){
     }
     
     return(
-                <div className='card text-white gap-3' style={{width:`${(pos+1)%5==0?50:25}%`}}>
+                
+                <div className={`card text-white gap-1 cardNi ${
+    (pos + 1) % 5 === 0 ? "card-50" : "card-25"
+  }`}>
                     <img src={item.urlToImage} className='card-img-top card-img-fixed'
                     style={{width:"100%"}}></img>
                     <div className='card-body'>

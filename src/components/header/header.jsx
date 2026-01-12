@@ -29,14 +29,14 @@ export function NewsHeader() {
 
   return (
     <div>
-      <div className="head fixed-top mainHeader">
+      <div className="head fixed-top mainHeader" >
 
         <div className="d-flex gap-2  align-items-end my-0 ms-2">
-            <span className='fw-bold bi bi-newspaper text-primary fs-3'></span>
-            <h5 className="fw-bold text-white">NewsFlow</h5>
+            <span className='fw-bold bi bi-newspaper text-primary fs-3'> </span>
+           
         </div>
         <h2 className='fw-lightbold text-white' style={{fontFamily:"sans-serif"}}>Empowering your daily dose of <b>News</b></h2>
-        <div className="input-group w-25">
+        <div className="input-group w-50 ui">
             <input className="form-control w-25 my-0 search input-placeholder" placeholder="search news,sources ..."
             id="userip"
             onBlur={getQuery}></input>
@@ -45,7 +45,7 @@ export function NewsHeader() {
             </button>
         </div>
       </div>
-        <div className='d-flex flex-wrap p-4 gap-3 justify-content-center' style={{marginTop:"5%"}} >
+        <div className='d-flex flex-wrap p-4 gap-0' style={{marginTop:"10%"}} >
         {
         
             def && newsdata

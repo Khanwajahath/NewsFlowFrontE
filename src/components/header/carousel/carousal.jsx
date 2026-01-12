@@ -6,7 +6,7 @@ export function Carousal({content}){
             className="d-block w-100"
             alt="Third slide"
           />
-          <div className="carousel-caption d-none d-md-block">
+          <div className="carousel-caption d-none d-md-block fw-bolder">
             <h5>{content.title}</h5>
             <p>{content.desription}</p>
           </div>

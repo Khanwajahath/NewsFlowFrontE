@@ -5,7 +5,7 @@
   border: none;
 }
 .mainHeader{
-  background-color: #101922;
+  background-color: #040608;
 }
 .search::placeholder {
   color: #b5c7d3;  /* placeholder color */
@@ -39,7 +39,9 @@
     justify-content: space-between;
     align-items: center;
   }
-  
+  .ui{
+    width: 25%;
+  }
   .head .input-group {
     width: 25%;
   }
