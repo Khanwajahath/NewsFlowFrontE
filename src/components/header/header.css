@@ -1,12 +1,12 @@
-.cat-btn{
-    background-color: #233648;
-}
+ 
 .search {
   background: #233648;
   color: white; /* input text color */
   border: none;
 }
-
+.mainHeader{
+  background-color: #101922;
+}
 .search::placeholder {
   color: #b5c7d3;  /* placeholder color */
   opacity: 1;      /* IMPORTANT for Firefox */
@@ -25,7 +25,7 @@
   gap: 15px;
   justify-content: space-between; 
   align-items: center;
-  margin-top: 5px;
+  
   padding: 10px 5px;
 }
 

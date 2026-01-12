@@ -15,19 +15,9 @@ function App() {
   return (
     <div  className='main d-flex flex-column'>
       <NewsHeader></NewsHeader>
-      <hr className='text-white'></hr>
-      <NewsCat></NewsCat>
-      <hr className='text-white'></hr>
-      <Breaking></Breaking>
-       <LatestStories></LatestStories>
-       <hr className='text-white'></hr>
-       <Footer></Footer>
+      <Footer></Footer>
     </div>
-    // <div>
-    //   <NewsCat></NewsCat>
-    //   <Breaking></Breaking>
-    //   <LatestStories></LatestStories>
-    // </div>
+
   )
 }
 
