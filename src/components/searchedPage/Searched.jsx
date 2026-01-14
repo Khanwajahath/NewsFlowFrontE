@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Card } from "../card/Card";
 import { Carousal } from "../header/carousel/carousal";
-
+import './searched.css'
 export function Searched({ data }) {
   return (
     <div>
       <h1 className="text-white">Breaking News</h1>
 
       <div className="card d-flex mt-3 w-100 justify-content-center" style={{marginLeft:"1px",width:"90vw" }}>
-        <div className="p-5">
+        <div className="p-2 ">
         <div
           id="carouselExampleCaptions"
           className="carousel slide"

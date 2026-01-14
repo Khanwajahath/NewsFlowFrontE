@@ -1,14 +1,19 @@
 import './card.css'
 export function Card({item,pos}){
 
-    function published(date){
-        const diffMs=new Date()-new Date(date)
-        const seconds = Math.floor(diffMs / 1000);
-        const minutes = Math.floor(diffMs / (1000 * 60));
-        const hours = Math.floor(diffMs / (1000 * 60 * 60));
-        const days=Math.floor(hours/24)
-        return days+" min ago";
-    }
+function published(date) {
+  const diffMs = Date.now() - new Date(date).getTime();
+
+  const minutes = Math.floor(diffMs / (1000 * 60));
+  if (minutes < 60) return `${minutes} min ago`;
+
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours} hrs ago`;
+
+  const days = Math.floor(hours / 24);
+  return `${days} ${days==1?"day":"days"} ago`;
+}
+
     
     return(
                 
@@ -23,9 +28,9 @@ export function Card({item,pos}){
                     </h6>
                      
                     </div>
-                    <div>
-                    <span className='bi bi-person-fill mx-2'><sapn>{item.author!=null?item.author:"Unknown"}</sapn></span>
-                    <span className='bi bi-dot'>{
+                    <div className='d-flex'>
+                    <span className='bi bi-person-fill mx-2'><span className='author'>{item.author!=null?item.author:"Unknown"}</span></span>
+                    <span className='bi bi-dot' style={{fontSize:"15px"}}>{
                         published(item.publishedAt)
                         }</span>
                     </div>

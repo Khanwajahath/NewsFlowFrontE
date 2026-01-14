@@ -4,14 +4,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: 2rem;
 }
 
 /* Desktop/Tablet styles (768px and above) */
 @media(min-width: 768px) {
     .footer {
         flex-direction: row !important; /* !important to override Bootstrap */
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         gap: 2rem; /* Add spacing between items */
     }
