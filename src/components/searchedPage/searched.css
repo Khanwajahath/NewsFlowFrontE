@@ -1,8 +1,7 @@
 .carousel-caption{
-    background-color: none;
+    background-color: rgba(128, 128, 128, 0.254);
     border-radius: 10px;
-     backdrop-filter: blur(10px);
-     
+    backdrop-filter: blur(10px);
 }
 .carouselExampleCaptions{
     border-radius: 20px;
