@@ -4,6 +4,8 @@ NewsFlow is a modern news aggregator application. The frontend is a React single
 
 
 deployed Link : https://newsflowfrontend.netlify.app/
+or
+https://news-flow-front-e.vercel.app/
 
 
 This README documents the project architecture, tech stack, setup, usage, and the caching strategy implemented to reduce multiple API calls.
