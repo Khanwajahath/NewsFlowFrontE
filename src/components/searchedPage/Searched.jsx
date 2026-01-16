@@ -4,15 +4,15 @@ import { Carousal } from "../header/carousel/carousal";
 import './searched.css'
 export function Searched({ data }) {
   return (
-    <div>
-      <h1 className="text-white">Breaking News</h1>
+    <div className=" break mt-4">
+      <h1 className="text-white ms-4">Breaking News</h1>
 
-      <div className="card d-flex mt-3 w-100 justify-content-center" style={{marginLeft:"1px",width:"90vw" }}>
-        <div className="p-2 ">
+      <div className="d-flex flex-column " >
         <div
           id="carouselExampleCaptions"
-          className="carousel slide"
+          className="carousel slide mx-3"
           data-bs-ride="carousel"
+   
         >
           {/* Indicators */}
           <div className="carousel-indicators">
@@ -131,16 +131,13 @@ export function Searched({ data }) {
             <span className="visually-hidden">Next</span>
           </button>
         </div>
-        </div>
-      </div>
-      <div
-        className="d-flex flex-wrap p-4 gap-0 "
-        id="main"
-      >
-        {data.shift() &&
+      
+        <div className="d-flex flex-wrap justify-content-center p-4 gap-4 ">
+          {data.shift() &&
           data.map((item, index) => (
             <Card key={item.url} item={item} pos={index}></Card>
           ))}
+        </div>
       </div>
     </div>
   );

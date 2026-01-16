@@ -4,9 +4,9 @@
   color: white; /* input text color */
   border: none;
 }
-.mainHeader{
+.head{
   background-color: #040608;
-  height: 25vh;
+  height: 15%;
 }
 .search::placeholder {
   color: #b5c7d3;  /* placeholder color */
@@ -20,36 +20,9 @@
   color: white;
 }
 
-.head {
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  justify-content: space-between; 
-  align-items: center;
-  padding: 10px 5px;
+.defS{
+  margin-top: 20%;
 }
-
-.head .input-group {
-  width: 100%;
-}
-
-@media(min-width: 768px) {
-  .head {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .ui{
-    width: 25%;
-  }
-  .head .input-group {
-    width: 25%;
-  }
-  .defS{
-  margin-top: 10%;
-}
-}
-
 .Topic {
   animation: moveUpDown 6s ease-in-out 1;
 }
@@ -70,3 +43,4 @@
   80%  { transform: translateY(-500%); }
   100% { transform: translateY(0); }
 }
+
