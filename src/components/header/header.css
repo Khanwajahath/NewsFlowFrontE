@@ -21,8 +21,15 @@
 }
 
 .defS{
+  margin-top: 10%;
+}
+
+@media (max-width:786px) {
+ .defS{
   margin-top: 20%;
 }
+}
+
 .Topic {
   animation: moveUpDown 6s ease-in-out 1;
 }

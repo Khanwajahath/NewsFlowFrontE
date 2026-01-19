@@ -2,6 +2,7 @@
  import { Card } from '../card/Card';
 import './header.css'
 import { Searched } from '../searchedPage/Searched';
+import Loader from '../loader/loader';
 export function NewsHeader() {
     const [articles,setArticles]=useState(50);
     const [newsdata,setnewsData]=useState([]);
@@ -28,7 +29,7 @@ export function NewsHeader() {
          setSearchedQuery(runquery)
          setDefault(0)
     }
-    
+   
   return (
     <div className='d-flex flex-column'>
       <div className="head fixed-top d-flex justify-content-between align-items-center" >
@@ -53,13 +54,15 @@ export function NewsHeader() {
       </div>
         <div className='d-flex flex-wrap justify-content-center gap-4 defS' >
         {
-            def && newsdata
+            def && newsdata.length===0? 
+                 <Loader className="waiter"></Loader> :
+                ( newsdata
                 .filter(item => item.urlToImage)
-                .slice(0, articles)
                 .map((item,index) => (
                 item.author!=null &&
                 <Card key={item.url} item={item} pos={index}/>
-                )) || <Searched data={newsdata.filter(item => item.urlToImage||item.author)} ></Searched>
+                ))) 
+                ||<Searched data={newsdata.filter(item => item.urlToImage||item.author)} ></Searched>
              
         }
         </div>
