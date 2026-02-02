@@ -10,8 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path='/news' element={<NewsHeader/>}></Route>
-      <Route path='/' element={<Login></Login>}></Route>
+      <Route path='/' element={<NewsHeader/>}></Route>
       </Routes>
     </BrowserRouter>
   
