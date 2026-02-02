@@ -2,60 +2,72 @@
  import { Card } from '../card/Card';
 import './header.css'
 import { Searched } from '../searchedPage/Searched';
-import Loader from '../loader/loader';
+ import { Footer } from '../footer/footer';
+import { NewsCat } from '../categories/categories';
+import  Carousel  from './carousel/carousal';
+import { Weather } from '../weather/weather';
 export function NewsHeader() {
     const [articles,setArticles]=useState(50);
     const [newsdata,setnewsData]=useState([]);
-
+    const [carousalData,setCarouslData]=useState([]);
     const [searchedQuery,setSearchedQuery]=useState(`${Math.round(Math.random()+1)==1?"technology":"cars"}`)
     const [runquery,setrunSearchQuery]=useState(null);
     const [def,setDefault]=useState(1)
     const [currIndex]=useState(0);
-    const [category,setCategories]=useState(["Sports","Technology","Business","Health","Entertainment","General","Science"])
+    const [category,setCategories]=useState("")
 
     useEffect(()=>{ 
       fetch(`https://news-flow-backend.vercel.app/api/news?q=${searchedQuery}`) 
         .then(response=>response.json()) 
         .then(data=>{
-          setnewsData(data.articles)
+          setCarouslData(data.articles.slice(0,10))
+          setnewsData(data.articles.slice(10))
         }) 
       },[searchedQuery])
+
     function getQuery(e){
-    
         setrunSearchQuery(e.target.value)
-      
     }
+
     function setQuery(){
          setSearchedQuery(runquery)
          setDefault(0)
     }
    
   return (
-    <div className='d-flex flex-column'>
-      <div className="head fixed-top d-flex justify-content-between align-items-center" >
+    <div className='flex-col text-black '>
+      <div className="bg-black text-1xl p-1 sticky top-0 z-10">
+        <div className='flex justify-between   p-2 items-center'>
 
-        <div className="  align-items-end my-0 ms-2 ">
-            <span className='fw-bolder bi bi-newspaper text-primary fs-3'> 
-              <span className='overflow-hidden border border-2  bg-white mx-1 rounded p-1 ' style={{height:"40px"}}>
-                News
-                </span>
-              Flow</span>
-        </div>
-         
-                                  
-        <div className="input-group mx-1 ui w-50 " style={{borderRadius:"10%"}}>
-            <input className="form-control w-25 my-0 search input-placeholder" placeholder="search news,sources ..."
-            id="userip"
-            onBlur={getQuery}></input>
-            <button
-            className='btn btn-light bi bi-search input-group-text' onClick={setQuery}>
+        <div className="my-0 ms-2 ">
+            <span className='font-bold text-2xl bg-white rounded p-1' >News Flow</span>
+        </div>       
+
+        <div className="flex gap-0 bg-white rounded-2xl p-1">
+            <input
+              className="placeholder:text-gray-500 placeholder:italic outline-0"
+              placeholder="Search Topic"
+              type="text"
+              name="search"
+              onBlur={getQuery}
+            />
+
+            <button onClick={setQuery}> 
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6  ">
+              <path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clipRule="evenodd" />
+              </svg>
             </button>
         </div>
+        </div>
+        <NewsCat></NewsCat>
       </div>
-        <div className='d-flex flex-wrap justify-content-center gap-4 defS' >
+      <div className='  md:flex align-middlee'>
+      <Carousel content={carousalData}></Carousel>
+      <Weather></Weather>
+      </div>
+        <div className='flex flex-wrap content-end gap-5  p-3 text-black' >
         {
-            def && newsdata.length===0? 
-                 <Loader className="waiter"></Loader> :
+            def &&
                 ( newsdata
                 .filter(item => item.urlToImage)
                 .map((item,index) => (
@@ -66,6 +78,8 @@ export function NewsHeader() {
              
         }
         </div>
+      <hr className='text-black text-2xl'></hr>
+      <Footer className="mt-5"></Footer>
     </div>
 
 

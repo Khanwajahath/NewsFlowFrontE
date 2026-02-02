@@ -4,10 +4,7 @@
   color: white; /* input text color */
   border: none;
 }
-.head{
-  background-color: #040608;
-  height: 15%;
-}
+ 
 .search::placeholder {
   color: #b5c7d3;  /* placeholder color */
   opacity: 1;      /* IMPORTANT for Firefox */

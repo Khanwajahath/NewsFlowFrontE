@@ -1,9 +1,9 @@
 export default function Loader() {
   return (
-    <div className="container-fluid p-2">
-      <div className="row g-4 ">
+    <div className="p-2 bg-white d-flex ">
+      <div className="row gap-4 ">
         {[1, 2, 3].map((item) => (
-          <div key={item} className="col-12 col-md-3">
+          <div key={item} className="col-12 col-md-3 w-25">
             <div className="card h-100 p-2" aria-hidden="true">
               <div className="card-body">
                 <h5 className="card-title placeholder-glow bg-secondary rounded p-2">
