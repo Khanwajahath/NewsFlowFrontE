@@ -39,11 +39,17 @@ export function Login() {
   }
 
   return (
-    <div className="flex-col">
+    <div className="flex-col" style={{
+        backgroundImage: "url('/bg.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: "100vh",
+      }}>
       <div className="my-0 ms-2">
-        <span className="font-bold text-2xl rounded p-1">News Flow</span>
+        <span className="font-sans font-extrabold text-white text-2xl rounded p-1 ">News Flow</span>
       </div>
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen flex  mt-20 p-4"
+      >
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={validationSchema}
