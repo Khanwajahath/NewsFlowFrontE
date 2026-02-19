@@ -20,11 +20,11 @@ export function NewsCat() {
   }, [ ]);
 
   return (
-   <div className="mt-2 bg-yellow-300 rounded-2xl">
-  <div className=" flex flex-wrap md:flex-nowrap justify-around p-2 text-white font-bold ">
+   <div className="mt-2   rounded-2xl">
+  <div className=" flex flex-wrap md:flex-nowrap justify-around p-2 text-white font-bold  ">
     {categories.map((cat, index) => (
       <button 
-        className="bg-indigo-600 hover:not-focus:bg-indigo-700   px-2 py-1 hover:cursor-pointer rounded  mt-1" 
+        className="bg-indigo-600 hover:not-focus:bg-indigo-700   px-2 py-1 hover:cursor-pointer    mt-1" 
         key={index}
       >
         {cat}

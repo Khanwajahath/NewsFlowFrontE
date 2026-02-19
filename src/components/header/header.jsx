@@ -35,14 +35,14 @@ export function NewsHeader() {
     }
    
   return (
-    <div className='flex-col text-black '>
+    <div className='flex-col text-black font-sans'>
       <div className="bg-black text-1xl p-1 sticky top-0 z-10">
         <div className='flex justify-between   p-2 items-center'>
 
         <div className="my-0 ms-2 ">
             <span className='font-bold text-2xl bg-white rounded p-1' >News Flow</span>
         </div>       
-
+         <NewsCat></NewsCat>
         <div className="flex gap-0 bg-white rounded-2xl p-1">
             <input
               className="placeholder:text-gray-500 placeholder:italic outline-0"
@@ -50,6 +50,7 @@ export function NewsHeader() {
               type="text"
               name="search"
               onBlur={getQuery}
+              
             />
 
             <button onClick={setQuery}> 
@@ -59,7 +60,6 @@ export function NewsHeader() {
             </button>
         </div>
         </div>
-        <NewsCat></NewsCat>
       </div>
       <div className='  md:flex align-middlee'>
       <Carousel content={carousalData}></Carousel>

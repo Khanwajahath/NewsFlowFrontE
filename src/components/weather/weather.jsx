@@ -36,7 +36,7 @@ const normalizeCondition = (condition = "") => {
 
 
     return (
-        <div className="bg-gradient-to-r from-blue-500 to-blue-300 mt-3 rounded-3xl p-3 w-3/4 md:w-1/4 text-white ">
+        <div className="bg-black mt-3 rounded-3xl p-3 w-3/4 md:w-1/4 text-white ">
      
             <div>
                 <h5 className="mb-2">{weatherData.address}</h5>
