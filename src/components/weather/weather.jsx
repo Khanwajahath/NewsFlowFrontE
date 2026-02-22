@@ -36,17 +36,30 @@ const normalizeCondition = (condition = "") => {
 
 
     return (
-        <div className="bg-black mt-3 rounded-3xl p-3 w-3/4 md:w-1/4 text-white ">
+        <div className="bg-black mt-3 rounded-3xl p-3 w-4/5 ms-5 md:w-[30%] text-white ">
      
             <div>
                 <h5 className="mb-2">{weatherData.address}</h5>
                 <span className="mb-2 font-bold">{weatherData.description}</span>
                 <div>
-                    <div className="flex-col mb-3">
-                        <button onClick={()=>setHourly(true)}
-                            className={`${activebtn }hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded`}>Hourly</button>
-                        <button 
-                        className={`${activebtn } hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded`} onClick={()=>setHourly(false)} >Daily</button>
+                    <div className="mb-3 mt-2">
+                        <button
+                        onClick={() => setHourly(true)}
+                        className={`px-4 py-2 rounded font-semibold me-2 ${
+                            hourly ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-600"
+                        }`}
+                        >
+                        Hourly
+                        </button>
+
+                        <button
+                        onClick={() => setHourly(false)}
+                        className={`px-4 py-2 rounded font-semibold ${
+                            !hourly ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-600"
+                        }`}
+                        >
+                        Daily
+                        </button>
                     </div>
                     <div className=" flex gap-2 flex-wrap overflow-hidden" id="data">
                     {

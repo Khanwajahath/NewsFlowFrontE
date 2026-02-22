@@ -37,7 +37,7 @@ export function NewsHeader() {
   return (
     <div className='flex-col text-black font-sans'>
       <div className="bg-black text-1xl p-1 sticky top-0 z-10">
-        <div className='flex justify-between   p-2 items-center'>
+        <div className='flex justify-between flex-wrap  p-2 items-center'>
 
         <div className="my-0 ms-2 ">
             <span className='font-bold text-2xl bg-white rounded p-1' >News Flow</span>
@@ -61,7 +61,7 @@ export function NewsHeader() {
         </div>
         </div>
       </div>
-      <div className='  md:flex align-middlee'>
+      <div className='  md:flex '>
       <Carousel content={carousalData}></Carousel>
       <Weather></Weather>
       </div>

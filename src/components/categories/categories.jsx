@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
- 
+import { useContext } from "react";
 export function NewsCat() {
   const [categories, setCategories] = useState([]);
    
@@ -20,8 +20,8 @@ export function NewsCat() {
   }, [ ]);
 
   return (
-   <div className="mt-2   rounded-2xl">
-  <div className=" flex flex-wrap md:flex-nowrap justify-around p-2 text-white font-bold  ">
+   <div className="mt-2  ">
+  <div className=" flex flex-wrap gap-0 md:flex-nowrap justify-around p-2 text-white font-bold  ">
     {categories.map((cat, index) => (
       <button 
         className="bg-indigo-600 hover:not-focus:bg-indigo-700   px-2 py-1 hover:cursor-pointer    mt-1" 

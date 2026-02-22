@@ -39,26 +39,26 @@ export function Login() {
   }
 
   return (
-    <div className="flex-col" style={{
+    <div className="flex-col justify-center" style={{
         backgroundImage: "url('/bg.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100vh",
       }}>
       <div className="my-0 ms-2">
-        <span className="font-sans font-extrabold text-white text-2xl rounded p-1 ">News Flow</span>
+        <span className="font-sans font-extrabold text-white text-2xl sm:text-5xl rounded p-1 ">News Flow</span>
       </div>
-      <div className="min-h-screen flex  mt-20 p-4"
+      <div className="min-h-screen flex  mt-20 p-4 justify-center"
       >
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={validationSchema}
           onSubmit={handleLogin}
         >
-          <Form className="flex flex-col gap-4 w-1/2">
+          <Form className="flex flex-col gap-4 align-middle">
             <div className="flex items-center justify-between">
               <label className="text-white font-bold">Email</label>
-              <div className="flex flex-col w-50">
+              <div className="flex flex-col  ">
                 <Field
                   name="email"
                   type="email"
@@ -89,7 +89,8 @@ export function Login() {
               >
                 Login
               </button>
-              <Link to="/register">Don't have an account?</Link>
+              <Link to="/register"
+              className="text-white">Don't have an account?</Link>
             </div>
           </Form>
         </Formik>
