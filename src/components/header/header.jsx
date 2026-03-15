@@ -6,6 +6,7 @@ import { Searched } from '../searchedPage/Searched';
 import { NewsCat } from '../categories/categories';
 import  Carousel  from './carousel/carousal';
 import { Weather } from '../weather/weather';
+ 
 export function NewsHeader() {
     const [articles,setArticles]=useState(50);
     const [newsdata,setnewsData]=useState([]);
@@ -14,8 +15,15 @@ export function NewsHeader() {
     const [runquery,setrunSearchQuery]=useState(null);
     const [def,setDefault]=useState(1)
     const [currIndex]=useState(0);
-    const [category,setCategories]=useState("")
-
+    const [category,setCategory]=useState("")
+    useEffect(()=>{
+      fetch(`https://news-flow-backend.vercel.app/api/news/category?category=${category}`).then(data=>data.json()).then(data=>{
+        console.log(data );
+        setCarouslData(data.articles.slice(0,5))
+        setnewsData(data.articles.slice(5))
+      })
+    },[category])
+    
     useEffect(()=>{ 
       fetch(`https://news-flow-backend.vercel.app/api/news?q=${searchedQuery}`) 
         .then(response=>response.json()) 
@@ -33,7 +41,10 @@ export function NewsHeader() {
          setSearchedQuery(runquery)
          setDefault(0)
     }
-   
+    function getCategoryData(category){
+      setCategory(category);
+      console.log(category + " is pressed")
+    }
   return (
     <div className='flex-col text-black font-sans'>
       <div className="bg-black text-1xl p-1 sticky top-0 z-10">
@@ -42,7 +53,7 @@ export function NewsHeader() {
         <div className="my-0 ms-2 ">
             <span className='font-bold text-2xl bg-white rounded p-1' >News Flow</span>
         </div>       
-         <NewsCat></NewsCat>
+         <NewsCat catHandler={getCategoryData}></NewsCat>
         <div className="flex gap-0 bg-white rounded-2xl p-1">
             <input
               className="placeholder:text-gray-500 placeholder:italic outline-0"
@@ -67,15 +78,17 @@ export function NewsHeader() {
       </div>
         <div className='flex flex-wrap content-end gap-5  p-3 text-black' >
         {
-            def &&
-                ( newsdata
-                .filter(item => item.urlToImage)
-                .map((item,index) => (
-                item.author!=null &&
-                <Card key={item.url} item={item} pos={index}/>
-                ))) 
-                ||<Searched data={newsdata.filter(item => item.urlToImage||item.author)} ></Searched>
+            (def && category === "") && (
+              newsdata
+                .filter(item => item.urlToImage && item.author != null)
+                .map((item, index) => (
+                  <Card key={item.url} item={item} pos={index} />
+                ))
+            )
+            ||
              
+               <Searched data={newsdata.filter(item => item.urlToImage || item.author)} />
+           
         }
         </div>
       <hr className='text-black text-2xl'></hr>

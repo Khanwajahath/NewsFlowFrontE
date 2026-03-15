@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-export function NewsCat() {
+export function NewsCat({catHandler}) {
   const [categories, setCategories] = useState([]);
    
   useEffect(() => {
@@ -26,6 +26,7 @@ export function NewsCat() {
       <button 
         className="bg-indigo-600 hover:not-focus:bg-indigo-700   px-2 py-1 hover:cursor-pointer    mt-1" 
         key={index}
+        onClick={()=>catHandler(cat)}
       >
         {cat}
       </button>
