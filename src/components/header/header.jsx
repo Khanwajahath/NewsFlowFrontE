@@ -16,6 +16,7 @@ export function NewsHeader() {
     const [def,setDefault]=useState(1)
     const [currIndex]=useState(0);
     const [category,setCategory]=useState("")
+    const [activeCategory, setActiveCategory] = useState(null);
     useEffect(()=>{
       fetch(`https://news-flow-backend.vercel.app/api/news/category?category=${category}`).then(data=>data.json()).then(data=>{
         console.log(data );
@@ -43,6 +44,7 @@ export function NewsHeader() {
     }
     function getCategoryData(category){
       setCategory(category);
+      setActiveCategory(cat);
       console.log(category + " is pressed")
     }
   return (
